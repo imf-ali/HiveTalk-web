@@ -1,0 +1,7 @@
+mutation Logout($token: String!){
+  logout(token: $token) {
+    user {
+      ...RegularUser
+    }
+  }
+}

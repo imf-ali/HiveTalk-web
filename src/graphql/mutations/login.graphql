@@ -4,9 +4,9 @@ mutation Login($options: UsernamePasswordInputType!){
       field
       message
     }
-    user {
-      id
-      username
+    user{
+      ...RegularUser
     }
+    token
   }
 }

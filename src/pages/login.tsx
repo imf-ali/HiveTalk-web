@@ -22,7 +22,8 @@ const Login: React.FC<{}> = ({}) => {
           console.log(response.data?.login)
 					if (response.data?.login.errors) {
 						setErrors(toErrorMap(response.data.login.errors));
-					} else if(response.data?.login.user){
+					} else if(response.data?.login.user && response.data?.login.token){
+						localStorage.setItem('user', response.data.login.token);
             router.push("/");
           }
 				}}

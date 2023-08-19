@@ -1,0 +1,11 @@
+query Me($token: String!){
+  me(token: $token) {
+    errors {
+      field 
+      message
+    }
+    user {
+      ...RegularUser
+    }
+  }
+}
