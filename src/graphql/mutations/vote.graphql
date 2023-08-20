@@ -1,0 +1,5 @@
+mutation Vote($value: Float!, $token: String!, $postId: Float!){
+  vote(value: $value, token: $token, postId: $postId){
+    points
+  }
+}

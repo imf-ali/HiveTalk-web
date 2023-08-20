@@ -1,6 +1,20 @@
-query Posts {
-  posts {
-    title
-    id
+query GetPosts($token: String){
+  getPosts {
+    errors {
+      field
+      message
+    }
+    posts {
+      id
+      points
+      textSnippet
+      title
+      userId
+      voteStatus(token: $token)
+      user {
+        id
+        username
+      }
+    }
   }
 }

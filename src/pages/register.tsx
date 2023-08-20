@@ -19,10 +19,13 @@ const Register: React.FC<{}> = () => {
         initialValues={{ username: '', password: '' }}
         onSubmit={async (values, { setErrors }) => {
           const response = await register(values);
-          console.log(response.data?.register);
           if (response.data?.register.errors) {
             setErrors(toErrorMap(response.data.register.errors));
-          } else if (response.data?.register.user) {
+          } else if (
+            response.data?.register.user &&
+            response.data?.register.token
+          ) {
+            localStorage.setItem('user', response.data?.register.token);
             router.push('/');
           }
         }}

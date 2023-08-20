@@ -54,4 +54,4 @@ const NavBar: React.FC<{}> = () => {
   );
 };
 
-export default withUrqlClient(createUrqlClient, { ssr: false })(NavBar);
+export default withUrqlClient(createUrqlClient, { ssr: true })(NavBar);

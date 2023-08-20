@@ -10,7 +10,7 @@ interface LayoutProps {
 const Layout: React.FC<LayoutProps> = ({ children, variant }) => {
   return (
     <>
-      <NavBar />
+      <NavBar pageProps={undefined} />
       <Wrapper variant={variant}>{children}</Wrapper>
     </>
   );
