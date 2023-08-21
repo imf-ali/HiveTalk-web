@@ -22,7 +22,7 @@ const documents = {
     "mutation UpdatePost($token: String!, $text: String!, $title: String!, $updatePostId: Float!) {\n  updatePost(token: $token, text: $text, title: $title, id: $updatePostId) {\n    errors {\n      field\n      message\n    }\n    post {\n      title\n      text\n      textSnippet\n      points\n      userId\n    }\n  }\n}": types.UpdatePostDocument,
     "mutation Vote($value: Float!, $token: String!, $postId: Float!) {\n  vote(value: $value, token: $token, postId: $postId) {\n    points\n  }\n}": types.VoteDocument,
     "query Me($token: String!) {\n  me(token: $token) {\n    errors {\n      field\n      message\n    }\n    user {\n      id\n      username\n    }\n  }\n}": types.MeDocument,
-    "query GetPost($postId: Int!, $token: String) {\n  post(id: $postId) {\n    errors {\n      field\n      message\n    }\n    post {\n      id\n      text\n      title\n      voteStatus(token: $token)\n      points\n    }\n  }\n}": types.GetPostDocument,
+    "query GetPost($postId: Int!, $token: String) {\n  post(id: $postId) {\n    errors {\n      field\n      message\n    }\n    post {\n      id\n      text\n      title\n      voteStatus(token: $token)\n      points\n      userId\n    }\n  }\n}": types.GetPostDocument,
     "query GetPosts($token: String) {\n  getPosts {\n    errors {\n      field\n      message\n    }\n    posts {\n      id\n      points\n      textSnippet\n      title\n      userId\n      voteStatus(token: $token)\n      user {\n        id\n        username\n      }\n    }\n  }\n}": types.GetPostsDocument,
 };
 
@@ -79,7 +79,7 @@ export function graphql(source: "query Me($token: String!) {\n  me(token: $token
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "query GetPost($postId: Int!, $token: String) {\n  post(id: $postId) {\n    errors {\n      field\n      message\n    }\n    post {\n      id\n      text\n      title\n      voteStatus(token: $token)\n      points\n    }\n  }\n}"): (typeof documents)["query GetPost($postId: Int!, $token: String) {\n  post(id: $postId) {\n    errors {\n      field\n      message\n    }\n    post {\n      id\n      text\n      title\n      voteStatus(token: $token)\n      points\n    }\n  }\n}"];
+export function graphql(source: "query GetPost($postId: Int!, $token: String) {\n  post(id: $postId) {\n    errors {\n      field\n      message\n    }\n    post {\n      id\n      text\n      title\n      voteStatus(token: $token)\n      points\n      userId\n    }\n  }\n}"): (typeof documents)["query GetPost($postId: Int!, $token: String) {\n  post(id: $postId) {\n    errors {\n      field\n      message\n    }\n    post {\n      id\n      text\n      title\n      voteStatus(token: $token)\n      points\n      userId\n    }\n  }\n}"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

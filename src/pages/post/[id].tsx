@@ -35,7 +35,7 @@ const Post: React.FC<{}> = () => {
     <Layout>
       <Heading mb={4}>{postData.data.post.title}</Heading>
       <Box mb={4}>{postData.data.post.text}</Box>
-      {me?.user.id === postData.data.post.id && (
+      {me?.user.id === postData.data.post.userId && (
         <EditDeletePost id={postData.data.post.id} setPosts={null} />
       )}
     </Layout>

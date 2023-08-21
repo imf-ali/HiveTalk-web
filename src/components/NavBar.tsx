@@ -10,6 +10,7 @@ import {
 import { withUrqlClient } from 'next-urql';
 import { createUrqlClient } from '../utils/createUrqlClient';
 import { useUserAuth } from '../utils/useUserAuth';
+import { useRouter } from 'next/router';
 
 type UserAuthResponse = {
   errors?: FieldError[];
@@ -17,16 +18,19 @@ type UserAuthResponse = {
 };
 
 const NavBar: React.FC<{}> = () => {
+  const router = useRouter();
   const [, logout] = useLogoutMutation();
   let body = null;
   const data: UserAuthResponse = useUserAuth();
   if (!data?.user) {
     body = (
       <>
-        <Link style={{ marginRight: '12px' }} href="/login">
+        <Link style={{ marginRight: '12px', color: 'black' }} href="/login">
           Login
         </Link>
-        <Link href="/register">Register</Link>
+        <Link style={{ color: 'black' }} href="/register">
+          Register
+        </Link>
       </>
     );
   } else {
@@ -35,11 +39,14 @@ const NavBar: React.FC<{}> = () => {
         <Button as={Link} href="/create-post" mr={4}>
           Create Post
         </Button>
-        <Box mr={2}>{data.user?.__typename}</Box>
+        <Box mr={4} color="black" fontWeight="bold">
+          {data.user?.username}
+        </Box>
         <Button
           onClick={() => {
             logout({ token: localStorage.getItem('user')! });
             localStorage.removeItem('user');
+            router.reload();
           }}
           variant="link"
         >

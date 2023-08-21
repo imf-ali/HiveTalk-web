@@ -2,12 +2,14 @@ import { ChevronDownIcon, ChevronUpIcon } from '@chakra-ui/icons';
 import { Flex, IconButton } from '@chakra-ui/react';
 import React, { useState } from 'react';
 import { Post, useVoteMutation } from '../generated/graphql';
+import { useUserAuth } from '../utils/useUserAuth';
 
 interface UpdootSectionProps {
   post: Post;
 }
 
 const UpdootSection: React.FC<UpdootSectionProps> = ({ post }) => {
+  const me = useUserAuth();
   const [points, setPoints] = useState(post.points);
   const [, vote] = useVoteMutation();
   const [voteStatus, setVoteStatus] = useState(post.voteStatus);
@@ -15,6 +17,9 @@ const UpdootSection: React.FC<UpdootSectionProps> = ({ post }) => {
     <Flex direction="column" justifyContent="center" alignItems="center" mr={4}>
       <IconButton
         onClick={async () => {
+          if (!me?.user) {
+            return;
+          }
           const response = await vote({
             postId: post.id,
             token: localStorage.getItem('user')!,
@@ -32,6 +37,9 @@ const UpdootSection: React.FC<UpdootSectionProps> = ({ post }) => {
       {points}
       <IconButton
         onClick={async () => {
+          if (!me?.user) {
+            return;
+          }
           const response = await vote({
             postId: post.id,
             token: localStorage.getItem('user')!,

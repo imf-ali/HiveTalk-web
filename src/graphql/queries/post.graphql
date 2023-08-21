@@ -10,6 +10,7 @@ query GetPost($postId: Int!, $token: String){
       title
       voteStatus(token: $token)
       points
+      userId
     }
   }
 }
