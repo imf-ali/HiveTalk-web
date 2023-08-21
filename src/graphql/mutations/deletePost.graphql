@@ -1,0 +1,3 @@
+mutation DeletePost($token: String!, $deletePostId: Float!){
+  deletePost(token: $token, id: $deletePostId)
+}

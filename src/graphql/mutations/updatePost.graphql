@@ -1,0 +1,15 @@
+mutation UpdatePost($token: String!, $text: String!, $title: String!, $updatePostId: Float!){
+  updatePost(token: $token, text: $text, title: $title, id: $updatePostId) {
+    errors {
+      field
+      message
+    }
+    post {
+      title
+      text
+      textSnippet
+      points
+      userId
+    }
+  }
+}

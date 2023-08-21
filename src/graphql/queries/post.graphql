@@ -1,0 +1,15 @@
+query GetPost($postId: Int!, $token: String){
+  post(id: $postId) {
+    errors {
+      field
+      message
+    }
+    post {
+      id
+      text
+      title
+      voteStatus(token: $token)
+      points
+    }
+  }
+}

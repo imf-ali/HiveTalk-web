@@ -11,7 +11,6 @@ const UpdootSection: React.FC<UpdootSectionProps> = ({ post }) => {
   const [points, setPoints] = useState(post.points);
   const [, vote] = useVoteMutation();
   const [voteStatus, setVoteStatus] = useState(post.voteStatus);
-  console.log(voteStatus);
   return (
     <Flex direction="column" justifyContent="center" alignItems="center" mr={4}>
       <IconButton

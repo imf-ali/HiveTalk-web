@@ -1,20 +1,22 @@
 import { useEffect, useState } from 'react';
-import { useGetPostsQuery } from '../generated/graphql';
+import { useGetPostQuery } from '../generated/graphql';
 
-export const useGetPost = () => {
+export const useEachPost = (postId: number) => {
   const [postData, setPostData] = useState<any>({
     data: null,
     fetching: null,
   });
   if (typeof window !== 'undefined') {
-    const [{ data, fetching }] = useGetPostsQuery({
+    const [{ data, fetching }] = useGetPostQuery({
+      pause: postId === -1,
       variables: {
+        postId,
         token: localStorage.getItem('user')!,
       },
     });
     useEffect(() => {
       setPostData({
-        data,
+        data: data?.post,
         fetching,
       });
     }, [data, fetching]);
