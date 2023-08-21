@@ -17,12 +17,12 @@ import { useGetPost } from '../utils/useGetPost';
 import UpdootSection from '../components/UpdootSection';
 import { DeleteIcon, EditIcon } from '@chakra-ui/icons';
 import { useUserAuth } from '../utils/useUserAuth';
+import { EditDeletePost } from '../components/EditDeletePost';
 
 const Index = () => {
   const [posts, setPosts] = useState<any>([]);
   const postData = useGetPost();
   const me = useUserAuth();
-  const [, deletePost] = useDeletePostMutation();
 
   useEffect(() => {
     setPosts(postData.data?.getPosts.posts || []);
@@ -51,31 +51,7 @@ const Index = () => {
                       {post.textSnippet}
                     </Text>
                     {me?.user.id === post.userId && (
-                      <Box>
-                        <IconButton
-                          as={Link}
-                          href={`/post/edit/${post.id}`}
-                          mr={4}
-                          aria-label="Edit Icon"
-                          icon={<EditIcon />}
-                        />
-                        <IconButton
-                          colorScheme="red"
-                          onClick={async () => {
-                            const response = await deletePost({
-                              deletePostId: post.id,
-                              token: localStorage.getItem('user')!,
-                            });
-                            if (response.data?.deletePost) {
-                              setPosts((posts: Post[]) =>
-                                posts.filter((item) => item.id !== post.id)
-                              );
-                            }
-                          }}
-                          aria-label="Delete Icon"
-                          icon={<DeleteIcon />}
-                        />
-                      </Box>
+                      <EditDeletePost id={post.id} setPosts={setPosts} />
                     )}
                   </Flex>
                 </Box>

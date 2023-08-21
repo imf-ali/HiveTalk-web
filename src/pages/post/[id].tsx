@@ -5,9 +5,12 @@ import { useEachPost } from '../../utils/useEachPost';
 import { useRouter } from 'next/router';
 import Layout from '../../components/Layout';
 import { Box, Heading } from '@chakra-ui/react';
+import { EditDeletePost } from '../../components/EditDeletePost';
+import { useUserAuth } from '../../utils/useUserAuth';
 
 const Post: React.FC<{}> = () => {
   const router = useRouter();
+  const me = useUserAuth();
   const postData = useEachPost(
     typeof router.query.id === 'string' ? parseInt(router.query.id) : -1
   );
@@ -32,6 +35,9 @@ const Post: React.FC<{}> = () => {
     <Layout>
       <Heading mb={4}>{postData.data.post.title}</Heading>
       <Box mb={4}>{postData.data.post.text}</Box>
+      {me?.user.id === postData.data.post.id && (
+        <EditDeletePost id={postData.data.post.id} setPosts={null} />
+      )}
     </Layout>
   );
 };
